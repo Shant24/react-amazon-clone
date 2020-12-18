@@ -4,7 +4,7 @@ import Product from '../../Product/Product';
 
 const Home = () => {
   return (
-    <div className={styles.home}>
+    <main className={styles.home}>
       <div className={styles.container}>
         <img className={styles.homeImg} src={primeVideoBanner} alt="" />
 
@@ -81,7 +81,7 @@ const Home = () => {
           />
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

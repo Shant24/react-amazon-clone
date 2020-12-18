@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
-import basketReducer from './basketReducer';
+import productReducer from './productReducer';
 import authReducer from './authReducer';
 
 const rootReducers = combineReducers({
   auth: authReducer,
-  basket: basketReducer,
+  product: productReducer,
 });
 
 export default rootReducers;

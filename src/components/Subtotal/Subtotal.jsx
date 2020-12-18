@@ -32,7 +32,7 @@ const Subtotal = ({ basket }) => {
 };
 
 const mapStateToProps = (state) => ({
-  basket: state.basket.basket,
+  basket: state.product.basket,
 });
 
 export default connect(mapStateToProps, null)(memo(Subtotal));

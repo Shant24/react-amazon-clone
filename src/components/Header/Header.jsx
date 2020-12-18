@@ -5,9 +5,10 @@ import styles from './header.module.scss';
 import amazonLogo from '../../assets/images/amazon-logo.png';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import { auth } from '../../firebase';
 
 const Header = (props) => {
-  const { basketCount } = props;
+  const { basketCount, user } = props;
 
   const [input, setInput] = useState('');
 
@@ -17,6 +18,8 @@ const Header = (props) => {
     e.preventDefault();
     console.log(input);
   };
+
+  const handleAuthentication = () => user && auth.signOut();
 
   return (
     <header className={styles.header}>
@@ -37,10 +40,16 @@ const Header = (props) => {
       </form>
 
       <nav className={styles.nav}>
-        <div className={styles.option}>
-          <span className={styles.lineOne}>Hello Guest</span>
-          <span className={styles.lineTwo}>Sign In</span>
-        </div>
+        <Link to={!user ? '/login' : ''}>
+          <div className={styles.option} onClick={handleAuthentication}>
+            <span className={styles.lineOne}>
+              Hello {user ? user.displayName || 'User' : 'Guest'}
+            </span>
+            <span className={styles.lineTwo}>
+              {user ? 'Sign Out' : 'Sign In'}
+            </span>
+          </div>
+        </Link>
 
         <div className={styles.option}>
           <span className={styles.lineOne}>Returns</span>
@@ -66,7 +75,8 @@ const Header = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  basketCount: state.basket.basket?.length,
+  basketCount: state.product.basket?.length,
+  user: state.auth.user,
 });
 
 export default connect(mapStateToProps, null)(memo(Header));

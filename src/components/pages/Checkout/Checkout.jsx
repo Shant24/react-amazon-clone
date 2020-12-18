@@ -4,9 +4,9 @@ import Subtotal from '../../Subtotal/Subtotal';
 import CheckoutProduct from '../../CheckoutProduct/CheckoutProduct';
 import { connect } from 'react-redux';
 
-const Checkout = ({ basket }) => {
+const Checkout = ({ basket, user }) => {
   return (
-    <div className={styles.checkout}>
+    <main className={styles.checkout}>
       <div className={styles.checkoutLeft}>
         <img
           className={styles.ad}
@@ -15,6 +15,7 @@ const Checkout = ({ basket }) => {
         />
 
         <div>
+          <h3>{user.email}</h3>
           <h2 className={styles.checkoutTitle}>Your shopping Basket</h2>
 
           {basket.map((item, i) => (
@@ -26,12 +27,13 @@ const Checkout = ({ basket }) => {
       <div className={styles.checkoutRight}>
         <Subtotal />
       </div>
-    </div>
+    </main>
   );
 };
 
 const mapStateToProps = (state) => ({
-  basket: state.basket.basket,
+  basket: state.product.basket,
+  user: state.auth.user,
 });
 
 export default connect(mapStateToProps, null)(memo(Checkout));
